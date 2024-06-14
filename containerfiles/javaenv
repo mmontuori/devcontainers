@@ -1,0 +1,5 @@
+FROM mmontuori/osbase:latest
+RUN apt install -y default-jdk-headless ant
+RUN apt clean autoclean
+RUN apt autoremove --yes
+RUN rm -rf /var/lib/{apt,dpkg,cache,log}/

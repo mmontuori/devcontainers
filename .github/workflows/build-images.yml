@@ -51,3 +51,10 @@ jobs:
         file: containerfiles/pythonenv
         push: true
         tags: mmontuori/pythonenv:latest
+
+    - name: build and push javaenv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/javaenv
+        push: true
+        tags: mmontuori/javaenv:latest
