@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+    echo "usage: pylintwrapper {directory}"
+    exit
+fi
+
+find ${1} | grep "\.py$" | xargs pylint
+
+exit 0

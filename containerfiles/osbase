@@ -1,0 +1,18 @@
+FROM ubuntu:22.04
+RUN apt update -y
+RUN apt install -y tzdata vim ca-certificates wget
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
+RUN apt upgrade -y
+RUN apt clean all
+RUN mkdir /usr/local/share/ca-certificates/extra
+COPY files/certs /usr/local/share/ca-certificates/extra
+RUN dpkg-reconfigure ca-certificates
+RUN update-ca-certificates
+RUN groupadd devgroup -g 1000
+RUN useradd devuser -m -u 1000 -g 1000
+RUN apt install -y git sudo
+RUN usermod devuser -G sudo
+RUN echo 'devuser:passw0rd' | chpasswd
+RUN sed -i 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers
+RUN apt clean all

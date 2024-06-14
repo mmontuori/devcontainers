@@ -1,0 +1,3 @@
+FROM osbase:latest
+RUN apt install -y build-essential git shellcheck
+
