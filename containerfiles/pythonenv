@@ -1,4 +1,4 @@
-FROM osbase:latest
+FROM mmontuori/osbase:latest
 RUN apt install -y python-all-dev python3-all-dev pylint git
 COPY files/pylintwrapper /usr/local/bin
 RUN chmod 755 /usr/local/bin/pylintwrapper
