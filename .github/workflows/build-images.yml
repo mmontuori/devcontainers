@@ -3,8 +3,10 @@ name: Build and Publish Docker image
 on:
   push:
     branches: [ "main" ]
+    paths: ['containerfiles/**', 'files/**']
   pull_request:
     branches: [ "main" ]
+    paths: ['containerfiles/**', 'files/**']
 
 jobs:
 
