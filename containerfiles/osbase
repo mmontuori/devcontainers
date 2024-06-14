@@ -6,7 +6,6 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 RUN apt upgrade -y
 RUN apt clean all
 RUN mkdir /usr/local/share/ca-certificates/extra
-COPY files/certs /usr/local/share/ca-certificates/extra
 RUN dpkg-reconfigure ca-certificates
 RUN update-ca-certificates
 RUN groupadd devgroup -g 1000
