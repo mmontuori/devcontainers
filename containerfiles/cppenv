@@ -1,3 +1,5 @@
 FROM mmontuori/osbase:latest
-RUN apt install -y build-essential git shellcheck
-
+RUN apt install -y build-essential shellcheck
+RUN apt clean autoclean
+RUN apt autoremove --yes
+RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
