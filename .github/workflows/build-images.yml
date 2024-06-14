@@ -28,3 +28,24 @@ jobs:
         file: containerfiles/osbase
         push: false
         tags: mmontuori/osbase:latest
+   
+    - name: build and push ansibleenv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/ansibleenv
+        push: true
+        tags: mmontuori/ansibleenv:latest
+
+    - name: build and push cppenv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/cppenv
+        push: true
+        tags: mmontuori/cppenv:latest
+
+    - name: build and push pythonenv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/pythonenv
+        push: true
+        tags: mmontuori/pythonenv:latest
