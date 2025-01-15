@@ -1,16 +1,17 @@
 FROM mmontuori/osbase:latest
 ENV ANSIBLE_VERSION 9.6.0
+RUN apt update
 RUN apt install -y gcc python3
-RUN apt install -y python3-pip software-properties-common ansible-lint pylint shellcheck
-RUN apt clean all
-COPY files/pip.conf /etc
-RUN pip3 install --upgrade pip
-RUN pip3 install ansible==${ANSIBLE_VERSION}
-RUN pip3 install jmespath
-RUN python3 -m pip install ansible-navigator
-COPY files/ansiblelintwrapper /usr/local/bin
-RUN chmod 755 /usr/local/bin/ansiblelintwrapper
-RUN apt clean autoclean
-RUN apt autoremove --yes
-RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
+#RUN apt install -y python3-pip software-properties-common ansible-lint pylint shellcheck
+#RUN apt clean all
+#COPY files/pip.conf /etc
+#RUN pip3 install --upgrade pip
+#RUN pip3 install ansible==${ANSIBLE_VERSION}
+#RUN pip3 install jmespath
+#RUN python3 -m pip install ansible-navigator
+#COPY files/ansiblelintwrapper /usr/local/bin
+#RUN chmod 755 /usr/local/bin/ansiblelintwrapper
+#RUN apt clean autoclean
+#RUN apt autoremove --yes
+#RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
 
