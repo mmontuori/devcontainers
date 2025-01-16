@@ -1,5 +1,7 @@
 #!/bin/bash
 
+label="mmontuori"
+
 if [ "$1" == "" ]; then
     echo "choose one of the following container files to build:"
     echo ""
@@ -7,7 +9,10 @@ if [ "$1" == "" ]; then
     exit
 fi
 
-container_user="devuser"
+if [ "$container_user" == "" ]; then
+    echo "congainer_user env variable not found, default to ${container_user}"
+    container_user="devuser"
+fi
 
 if [ "$2" != "" ];then
     cmd="${2} ${3} ${4} ${5} ${6}"
@@ -16,4 +21,4 @@ else
 fi
 echo "running ${cmd} as starting command..."
 
-docker run --rm --user ${container_user}:devgroup -w /home/${USER} -v ${HOME}:/home/${USER} --rm -ti $1 ${cmd}
+docker run --rm --user ${container_user}:devgroup -w /home/${USER} -v ${HOME}:/home/${USER} --rm -ti ${label}/$1 ${cmd}
