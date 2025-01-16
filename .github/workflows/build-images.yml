@@ -58,3 +58,10 @@ jobs:
         file: containerfiles/javaenv
         push: true
         tags: mmontuori/javaenv:latest
+
+    - name: build and push aienv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/aienv
+        push: true
+        tags: mmontuori/aienv:latest

@@ -9,4 +9,5 @@ fi
 
 if docker build -t $1 -f containerfiles/$1 .; then
 	echo "y" | docker builder prune -a
+	docker image prune -f --filter label=stage=build-step
 fi
