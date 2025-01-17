@@ -1,6 +1,7 @@
 FROM mmontuori/pythonenv
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install tensorflow numpy pandas scipy scikit-learn torch tensorflow keras matplotlib seaborn opencv-python nltk spacy
+RUN python3 -m pip install tensorflow numpy pandas scipy scikit-learn torch tensorflow keras matplotlib seaborn opencv-python nltk spacy jupyterlab notebook
 RUN apt clean autoclean
 RUN apt autoremove --yes
 RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
+EXPOSE 8888
