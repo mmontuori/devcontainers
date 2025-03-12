@@ -27,9 +27,14 @@ if [ "$container_port" != "" ]; then
     container_args="-p${container_port}:${container_port}"
 fi
 
+if [ "$use_gpus" == != "" ]; then
+    gpu_args="--gpus=all"
+fi
+
 echo "container_user=${container_user}"
 echo "container_port=${container_port}"
+echo "use_gpus=${use_gpus}"
 
 echo "running ${cmd} as starting command..."
 
-docker run --rm --user ${container_user}:devgroup $container_args -w /home/${USER} -v ${HOME}:/home/${USER} --rm -ti ${label}/$1 ${cmd}
+docker run --rm --user ${use_args} ${container_user}:devgroup $container_args -w /home/${USER} -v ${HOME}:/home/${USER} --rm -ti ${label}/$1 ${cmd}
