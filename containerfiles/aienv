@@ -1,4 +1,6 @@
 FROM mmontuori/pythonenv
+RUN apt update
+RUN apt -y install software-properties-common
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install tensorflow numpy pandas scipy scikit-learn torch tensorflow keras matplotlib seaborn opencv-python nltk spacy jupyterlab notebook nnfs
 COPY containerfiles/files/jupyter-notebook.sh /usr/local/bin/

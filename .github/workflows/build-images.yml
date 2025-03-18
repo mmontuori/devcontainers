@@ -65,3 +65,10 @@ jobs:
         file: containerfiles/aienv
         push: true
         tags: mmontuori/aienv:latest
+
+    - name: build and push aienv-wsl docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/aienv-wsl
+        push: true
+        tags: mmontuori/aienv-wsl:latest
