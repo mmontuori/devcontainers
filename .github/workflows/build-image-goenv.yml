@@ -1,0 +1,33 @@
+name: Build GO Environment image and Publish to Docker
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: ['containerfiles/goenv']
+  pull_request:
+    branches: [ "main" ]
+    paths: ['containerfiles/goenv']
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: check out repository
+      uses: actions/checkout@v4
+
+    - name: login to docker registry
+      uses: docker/login-action@v3
+      with:
+        username: ${{secrets.DOCKER_USER}}
+        password: ${{secrets.DOCKER_TOKEN}}
+
+    - name: build and push goenv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/goenv
+        push: true
+        tags: mmontuori/goenv:latest

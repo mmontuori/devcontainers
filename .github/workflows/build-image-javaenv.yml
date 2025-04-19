@@ -1,0 +1,33 @@
+name: Build Java Environment image and Publish to Docker
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: ['containerfiles/javaenv']
+  pull_request:
+    branches: [ "main" ]
+    paths: ['containerfiles/javaenv']
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: check out repository
+      uses: actions/checkout@v4
+
+    - name: login to docker registry
+      uses: docker/login-action@v3
+      with:
+        username: ${{secrets.DOCKER_USER}}
+        password: ${{secrets.DOCKER_TOKEN}}
+
+    - name: build and push javaenv docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/javaenv
+        push: true
+        tags: mmontuori/javaenv:latest
