@@ -1,0 +1,33 @@
+name: Build and Publish Docker image
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: ['containerfiles/osbase']
+  pull_request:
+    branches: [ "main" ]
+    paths: ['containerfiles/osbase']
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: check out repository
+      uses: actions/checkout@v4
+
+    - name: login to docker registry
+      uses: docker/login-action@v3
+      with:
+        username: ${{secrets.DOCKER_USER}}
+        password: ${{secrets.DOCKER_TOKEN}}
+
+    - name: build and push osbase docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/osbase
+        push: true
+        tags: mmontuori/osbase:latest
