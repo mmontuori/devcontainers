@@ -4,6 +4,9 @@ $container_owner = "mmontuori"
 
 if ( $args.length -lt 1 ) {
     Write-Output "usage: .\build.ps1 {container name} [container tag]"
+    Write-Output "Available containers:"
+    $container_files = Get-ChildItem -Path containerfiles
+    $container_files | ForEach-Object { Write-Output $_.Name }
     Exit 1
 }
 
