@@ -1,4 +1,4 @@
-name: Build and Publish Docker image
+name: Build OSBase image and Publish to Docker
 
 on:
   push:
