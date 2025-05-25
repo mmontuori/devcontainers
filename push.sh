@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if ! test -f .env; then
+    echo "No .env file found. Please create one with the necessary environment variables."
+    exit 1
+fi
+source .env
+
+echo "using container runtime: $container_runtime"
+
 if [ "$1" == "" ]; then
     echo "usage: push {image_name} [remote_image_name]"
     echo ""

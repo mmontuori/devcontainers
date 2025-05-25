@@ -1,22 +1,22 @@
 #!/bin/bash
 
-label="mmontuori"
+if ! test -f .env; then
+    echo "No .env file found. Please create one with the necessary environment variables."
+    exit 1
+fi
+source .env
 
 if [ "$1" == "" ]; then
     echo "choose one of the following container files to build:"
     echo ""
     ls -C containerfiles/ | sed 's/  /\n/g'
     echo ""
-    echo "set the following variables to override defaults:"
+    echo "set the following variables in the .env file:"
     echo "    export container_user="
     echo "    export container_port="
     echo "    export use_gpus="
     echo ""
     exit
-fi
-
-if [ "$container_user" == "" ]; then
-    container_user="devuser"
 fi
 
 if [ "$2" != "" ];then
@@ -29,18 +29,11 @@ if [ "$1" == "aienv" ]; then
     export container_port=8888
 fi
 
-if [ "$container_port" != "" ]; then
-    container_args="-p${container_port}:${container_port}"
-fi
-
-if [ "$use_gpus" != "" ]; then
-    gpu_args="--gpus=all"
-fi
-
+echo "using container runtime: $container_runtime"
 echo "container_user=${container_user}"
 echo "container_port=${container_port}"
 echo "use_gpus=${use_gpus}"
 
 echo "running ${cmd} as starting command..."
 
-docker run --rm --user ${container_user}:devgroup ${gpu_args} $container_args -w /home/${USER} -v ${HOME}:/home/${USER} --rm -ti ${label}/$1 ${cmd}
+$container_runtime run --security-opt label=disable --rm --user ${container_user}:devgroup ${gpu_args} $container_args -w /home/${USER} -v ${dev_volume}:/home/${USER} -ti ${label}/$1 ${cmd}

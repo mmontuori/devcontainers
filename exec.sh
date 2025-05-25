@@ -1,6 +1,12 @@
 #!/bin/bash
 
-label="mmontuori"
+if ! test -f .env; then
+    echo "No .env file found. Please create one with the necessary environment variables."
+    exit 1
+fi
+source .env
+
+echo "using container runtime: $container_runtime"
 
 if [ "$1" == "" ]; then
     echo "choose one of the following container files to build:"
@@ -16,6 +22,6 @@ else
 fi
 echo "running ${cmd} as starting command..."
 
-docker_id=`docker ps | grep "$1" | awk '{ print $1 }'`
+docker_id=`$container_runtime ps | grep "$1" | awk '{ print $1 }'`
 
-docker exec -ti ${docker_id} ${cmd}
+$container_runtime exec -ti ${docker_id} ${cmd}
