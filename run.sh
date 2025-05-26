@@ -25,9 +25,9 @@ else
     cmd="/bin/bash"
 fi
 
-if [ "$1" == "aienv" ]; then
-    export container_port=8888
-fi
+#if [ "$1" == "aienv" ]; then
+#    export container_port=8888
+#fi
 
 echo "using container runtime: $container_runtime"
 echo "container_user=${container_user}"
