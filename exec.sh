@@ -4,7 +4,7 @@ if ! test -f .env; then
     echo "No .env file found. Please create one with the necessary environment variables."
     exit 1
 fi
-source .env
+source setenv.sh
 
 echo "using container runtime: $container_runtime"
 
