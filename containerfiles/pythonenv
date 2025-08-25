@@ -1,5 +1,9 @@
 FROM mmontuori/osbase:latest
 RUN apt install -y python-all-dev python3-all-dev pylint python3-pip
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install jupyterlab notebook
+COPY containerfiles/files/jupyter-notebook.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/jupyter-notebook.sh
 COPY files/pylintwrapper /usr/local/bin
 RUN chmod 755 /usr/local/bin/pylintwrapper
 RUN apt clean autoclean

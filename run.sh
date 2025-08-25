@@ -22,7 +22,8 @@ fi
 if [ "$2" != "" ];then
     cmd="${2} ${3} ${4} ${5} ${6}"
 else
-    cmd="/bin/bash"
+    cmd="su - ${container_user}"
+    #cmd="/bin/bash -i"
 fi
 
 #if [ "$1" == "aienv" ]; then
@@ -36,4 +37,4 @@ echo "use_gpus=${use_gpus}"
 
 echo "running ${cmd} as starting command..."
 
-$container_runtime run --security-opt label=disable --rm --user ${container_user}:devgroup ${gpu_args} $container_args -w /home/${USER} -v ${dev_volume}:/home/${USER} -ti ${label}/$1 ${cmd}
+$container_runtime run --security-opt label=disable --rm --user ${container_user}:devgroup ${gpu_args} $container_args -w /home/${container_user} -v ${dev_volume}:/home/${container_user} -ti ${label}/$1 ${cmd}

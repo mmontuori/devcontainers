@@ -18,7 +18,7 @@ fi
 if [ "$2" != "" ];then
     cmd="${2} ${3} ${4} ${5} ${6}"
 else
-    cmd="/bin/bash"
+    cmd="su - ${container_user}"
 fi
 echo "running ${cmd} as starting command..."
 
