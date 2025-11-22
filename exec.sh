@@ -9,9 +9,9 @@ source setenv.sh
 echo "using container runtime: $container_runtime"
 
 if [ "$1" == "" ]; then
-    echo "choose one of the following container files to build:"
+    echo "choose one of the following container files to exec:"
     echo ""
-    ls -C containerfiles/ | sed 's/  /\n/g'
+    find containerfiles/ -maxdepth 1 -type f -printf "%f\n"
     exit
 fi
 

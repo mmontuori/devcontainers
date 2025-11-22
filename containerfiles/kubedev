@@ -1,0 +1,25 @@
+FROM mmontuori/osbase:latest
+
+ARG KC_CLI
+ENV KC_CLI=${KC_CLI:-kubectl}
+RUN echo "Using KC_CLI=${KC_CLI}"
+
+RUN if [ "$KC_CLI" = "kubectl" ]; then \
+    echo "Installing kubectl..."; \
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"; \
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl; \
+    rm kubectl; \
+    elif [ "$KC_CLI" == "oc" ]; then \
+    echo "Installing oc... TBD"; \
+    else \
+    echo "NOT SUPPORTED KC_CLI"; \
+    fi
+
+RUN sudo apt-get install apt-transport-https wget --yes; \
+    wget -O /tmp/kubecolor.deb https://kubecolor.github.io/packages/deb/pool/main/k/kubecolor/kubecolor_$(wget -q -O- https://kubecolor.github.io/packages/deb/version)_$(dpkg --print-architecture).deb; \
+    sudo dpkg -i /tmp/kubecolor.deb; \
+    sudo apt update -y; \
+    sudo apt install -y  kubecolor
+
+RUN echo "alias kubectl=kubecolor" >> /etc/profile.d/${KC_CLI}_alias.sh
+RUN ${KC_CLI} completion bash > /etc/bash_completion.d/${KC_CLI}_completion.sh
