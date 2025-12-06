@@ -25,6 +25,13 @@ jobs:
         file: containerfiles/osbase
         push: true
         tags: mmontuori/osbase:latest
+    
+    - name: build and push toolbox docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/toolbox
+        push: true
+        tags: mmontuori/toolbox:latest
    
     - name: build and push ansibleenv docker image to registry
       uses: docker/build-push-action@v5
