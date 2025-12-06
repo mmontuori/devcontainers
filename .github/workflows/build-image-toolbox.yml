@@ -3,10 +3,10 @@ name: Build Toolbox image and Publish to Docker
 on:
   push:
     branches: [ "main" ]
-    paths: ['containerfiles/osbase']
+    paths: ['containerfiles/toolbox']
   pull_request:
     branches: [ "main" ]
-    paths: ['containerfiles/osbase']
+    paths: ['containerfiles/toolbox']
   workflow_dispatch:
 
 jobs:
