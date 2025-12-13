@@ -1,16 +1,16 @@
 FROM ubuntu:22.04
-RUN apt update -y
+RUN apt-get update -y
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 RUN dpkg-reconfigure -f noninteractive tzdata
-RUN apt install -y vim ca-certificates wget curl gnupg2 git tmux
-RUN apt upgrade -y
+RUN apt-get install -y vim ca-certificates wget curl gnupg2 git tmux
+RUN apt-get upgrade -y
 RUN mkdir /usr/local/share/ca-certificates/extra
 RUN dpkg-reconfigure ca-certificates
 RUN update-ca-certificates
 RUN groupadd devgroup -g 1001
 RUN useradd devuser -m -u 1001 -g 1001 -s /bin/bash
-RUN apt install -y git sudo
+RUN apt-get install -y git sudo
 RUN usermod devuser -G sudo
 #RUN echo 'devuser:passw0rd' | chpasswd
 RUN passwd -d devuser
@@ -20,6 +20,6 @@ COPY containerfiles/files/tmux.conf /etc/tmux.conf
 RUN chmod 644 /etc/tmux.conf
 RUN chmod +x /etc/profile.d/set-bash-prompt.sh
 RUN git clone https://github.com/tmux-plugins/tpm.git /etc/tmux/plugins/tpm
-RUN apt clean all
-RUN apt autoremove --yes
+RUN apt-get clean all
+RUN apt-get autoremove --yes
 RUN rm -rf /var/lib/{apt,dpkg,cache,log}/

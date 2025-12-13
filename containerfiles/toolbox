@@ -1,8 +1,8 @@
 FROM mmontuori/osbase:latest
 RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/dpkg/dpkg.cfg.d/excludes
-RUN apt update && \
+RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
-    apt install --no-install-recommends -y \
+    apt-get install --no-install-recommends -y \
         arping \
         arptables \
         bridge-utils \

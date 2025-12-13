@@ -1,5 +1,5 @@
 FROM mmontuori/osbase:latest
-RUN apt install -y build-essential shellcheck
-RUN apt clean autoclean
-RUN apt autoremove --yes
+RUN apt-get install -y build-essential shellcheck
+RUN apt-get clean autoclean
+RUN apt-get autoremove --yes
 RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
