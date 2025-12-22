@@ -10,7 +10,7 @@ RUN dpkg-reconfigure ca-certificates
 RUN update-ca-certificates
 RUN groupadd devgroup -g 1001
 RUN useradd devuser -m -u 1001 -g 1001 -s /bin/bash
-RUN apt-get install -y git sudo
+RUN apt-get install -y git sudo bc
 RUN usermod devuser -G sudo
 #RUN echo 'devuser:passw0rd' | chpasswd
 RUN passwd -d devuser
