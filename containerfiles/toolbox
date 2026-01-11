@@ -55,4 +55,8 @@ RUN apt-get update && \
     sudo chmod a+x /usr/local/bin/yq && \
     mkdir -p /root/.kube
 
+COPY files/install-wirt.sh /usr/local/bin/install-wirt.sh
+RUN chmod +x /usr/local/bin/install-wirt.sh && \
+    /usr/local/bin/install-wirt.sh    
+
 WORKDIR /root
