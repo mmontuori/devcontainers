@@ -41,8 +41,9 @@ RUN apt-get update && \
         tree \
         ngrep \
         vim \
-        wget && \
-    rm -rf /var/lib/apt/lists/* && \
+        wget
+
+RUN rm -rf /var/lib/apt/lists/* && \
     curl -sLf https://get.docker.com/builds/Linux/x86_64/docker-1.10.3 > /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     curl -sLf https://storage.googleapis.com/kubernetes-release/release/v1.16.8/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.16 && \
