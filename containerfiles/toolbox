@@ -59,6 +59,12 @@ COPY files/install-wirt.sh /usr/local/bin/install-wirt.sh
 RUN chmod +x /usr/local/bin/install-wirt.sh && \
     /usr/local/bin/install-wirt.sh
 
+RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh
+RUN chmod +x /tmp/install.sh && \
+    /tmp/install.sh --yes && \
+    rm -f /tmp/install.sh
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
+
 RUN cd /tmp && \
     wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
     tar xvfz oc.tar.gz && \ 
