@@ -44,11 +44,11 @@ RUN apt-get update && \
         wget
 
 RUN rm -rf /var/lib/apt/lists/* && \
-    curl -sLf https://get.docker.com/builds/Linux/x86_64/docker-1.10.3 > /usr/bin/docker && \
+    curl -ksLf https://get.docker.com/builds/Linux/x86_64/docker-1.10.3 > /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
-    curl -sLf https://storage.googleapis.com/kubernetes-release/release/v1.16.8/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.16 && \
-    curl -sLf https://storage.googleapis.com/kubernetes-release/release/v1.17.4/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.17 && \
-    curl -sLf https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.18 && \
+    curl -ksLf https://storage.googleapis.com/kubernetes-release/release/v1.16.8/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.16 && \
+    curl -ksLf https://storage.googleapis.com/kubernetes-release/release/v1.17.4/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.17 && \
+    curl -ksLf https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/$(dpkg --print-architecture)/kubectl > /usr/local/bin/kubectl-1.18 && \
     chmod +x /usr/local/bin/kubectl* && \
     ln -s /usr/local/bin/kubectl-1.18 /usr/local/bin/kubectl && \
     sudo wget --no-check-certificate -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && \
@@ -59,11 +59,11 @@ COPY files/install-wirt.sh /usr/local/bin/install-wirt.sh
 RUN chmod +x /usr/local/bin/install-wirt.sh && \
     /usr/local/bin/install-wirt.sh
 
-RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh
+RUN curl -ksS https://starship.rs/install.sh > /tmp/install.sh
 RUN chmod +x /tmp/install.sh && \
     /tmp/install.sh --yes && \
     rm -f /tmp/install.sh
-RUN curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
+RUN curl --proto '=https' -kLsSf https://setup.atuin.sh | sh -s -- --non-interactive
 
 RUN apt-get update
 RUN apt-get install apt-transport-https wget --yes
@@ -72,7 +72,7 @@ RUN dpkg -i /tmp/kubecolor.deb
 RUN apt update
 
 RUN cd /tmp && \
-    wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
+    wget --no-check-certificate https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
     tar xvfz oc.tar.gz && \ 
     mv oc /usr/local/bin/ && \
     mv kubectl /usr/local/bin/ && \
