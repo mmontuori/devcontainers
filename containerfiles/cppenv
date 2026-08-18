@@ -1,4 +1,5 @@
 FROM mmontuori/osbase:latest
+
 RUN apt-get install -y build-essential shellcheck
 RUN apt-get clean autoclean
 RUN apt-get autoremove --yes

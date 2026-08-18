@@ -1,4 +1,5 @@
 FROM mmontuori/osbase:latest
+
 RUN apt-get install -y default-jdk-headless ant
 RUN apt-get clean autoclean
 RUN apt-get autoremove --yes
