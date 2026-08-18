@@ -28,7 +28,6 @@ RUN apt-get update && \
         manpages-posix \
         mtr \
         net-tools \
-        netcat \
         netcat-openbsd \
         openssl \
         openssh-client \
@@ -57,6 +56,13 @@ RUN apt-get update && \
 
 COPY files/install-wirt.sh /usr/local/bin/install-wirt.sh
 RUN chmod +x /usr/local/bin/install-wirt.sh && \
-    /usr/local/bin/install-wirt.sh    
+    /usr/local/bin/install-wirt.sh
+
+RUN cd /tmp && \
+    wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
+    tar xvfz oc.tar.gz && \ 
+    mv oc /usr/local/bin/ && \
+    mv kubectl /usr/local/bin/ && \
+    rm /tmp/*
 
 WORKDIR /root
