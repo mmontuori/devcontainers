@@ -1,1 +1,4 @@
 .env
+
+!containerfiles/files/certs/README.md
+containerfiles/files/certs

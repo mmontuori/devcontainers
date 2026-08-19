@@ -1,11 +1,8 @@
 #!/bin/bash
 
-ENV_FILE=".env"
+source "$(dirname "$0")/setenv.sh"
 
-if test -f $ENV_FILE; then
-        echo "environment file already exists! Remove manually before running this script"
-        exit 1
-fi
+ENV_FILE="${running_dir}/.env"
 
 read -p "container runtime [podman|docker]: " container_runtime
 

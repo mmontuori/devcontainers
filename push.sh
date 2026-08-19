@@ -1,10 +1,6 @@
 #!/bin/bash
 
-if ! test -f .env; then
-    echo "No .env file found. Please create one with the necessary environment variables."
-    exit 1
-fi
-source .env
+source "$(dirname "$0")/setenv.sh"
 
 echo "using container runtime: $container_runtime"
 
@@ -13,7 +9,7 @@ if [ "$1" == "" ]; then
     echo ""
     echo "choose one of the following container files to build:"
     echo ""
-    ls -C containerfiles/ | sed 's/  /\n/g'
+    ls -C "${running_dir}/containerfiles/" | sed 's/  /\n/g'
     exit
 fi
 
@@ -27,6 +23,6 @@ fi
 
 echo "pushing container image ${image_name} to ${image_server}/${remote_name}"
 
-docker tag ${1} images.pkgrepo.bcbssc.com/${remote_name}
-docker push images.pkgrepo.bcbssc.com/${remote_name}
-docker tag images.pkgrepo.bcbssc.com/${remote_name} ${1}
+${container_runtime} tag ${1} images.pkgrepo.bcbssc.com/${remote_name}
+${container_runtime} push images.pkgrepo.bcbssc.com/${remote_name}
+${container_runtime} tag images.pkgrepo.bcbssc.com/${remote_name} ${1}

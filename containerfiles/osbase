@@ -6,6 +6,8 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 RUN apt-get install -y vim ca-certificates wget curl gnupg2 git tmux zsh
 RUN apt-get upgrade -y
 RUN mkdir /usr/local/share/ca-certificates/extra
+COPY containerfiles/files/certs /usr/local/share/ca-certificates/extra
+RUN update-ca-certificates
 RUN dpkg-reconfigure ca-certificates
 RUN update-ca-certificates
 RUN groupadd devgroup -g 1001

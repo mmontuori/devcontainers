@@ -35,3 +35,10 @@ if [ "$1" == "print" ]; then
     echo "container_port=${container_port}"
     echo "dev_volume=${dev_volume}"
 fi
+
+export running_dir=$(dirname $0)
+
+if ! test -f "${running_dir}/.env"; then
+    echo "No .env file found in ${running_dir}. Please create one with the necessary environment variables."
+    exit 1
+fi

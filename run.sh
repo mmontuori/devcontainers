@@ -1,15 +1,11 @@
 #!/bin/bash
 
-if ! test -f .env; then
-    echo "No .env file found. Please create one with the necessary environment variables."
-    exit 1
-fi
-source setenv.sh
+source "$(dirname "$0")/setenv.sh"
 
 if [ "$1" == "" ]; then
     echo "choose one of the following container files to build:"
     echo ""
-    find containerfiles/ -maxdepth 1 -type f -printf "%f\n"
+    find "${running_dir}/containerfiles/" -maxdepth 1 -type f -printf "%f\n"
     echo ""
     echo "set the following variables in the .env file:"
     echo "    export container_user="
@@ -42,5 +38,7 @@ else
 fi
 
 echo "running ${cmd} as starting command..."
+
+cd ${running_dir}
 
 $container_runtime run --security-opt label=disable --rm --user ${user_string} ${gpu_args} $container_args -w /home/${container_user} -v ${dev_volume}:/home/${container_user} -ti ${label}/$1 ${cmd}
