@@ -1,6 +1,8 @@
 name: Build all images and Publish to Docker
 
 on:
+  schedule:
+    - cron: '0 0 * * 0' # every Sunday at 00:00
   workflow_dispatch:
 
 jobs:
@@ -81,3 +83,18 @@ jobs:
         file: containerfiles/goenv
         push: true
         tags: mmontuori/goenv:latest
+
+    - name: build and push kubedev docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/kubedev
+        push: true
+        tags: mmontuori/kubedev:latest
+
+    - name: build and push android-docker docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        file: containerfiles/android-docker
+        push: true
+        tags: mmontuori/android-docker:latest
+
