@@ -23,7 +23,7 @@ if [ "$2" != "" ];then
     cmd="${2} ${3} ${4} ${5} ${6}"
 else
     #cmd="su - ${container_user}"
-    cmd="/bin/bash -i"
+    cmd="/bin/zsh -i"
 fi
 
 #if [ "$1" == "aienv" ]; then

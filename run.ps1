@@ -30,6 +30,6 @@ if ( $container_name -eq "" ) {
 
 Write-Output "running ${container_owner}/${container_name} with tag:${tag}"
 
-$command = "docker run -ti --rm --user ${container_user}:devgroup -v ${work_directory}:/home/${env:USERNAME} ${container_owner}/${container_name}:${tag} /bin/bash"
+$command = "docker run -ti --rm --user ${container_user}:devgroup -v ${work_directory}:/home/${env:USERNAME} ${container_owner}/${container_name}:${tag} /bin/zsh"
 
 Invoke-Expression "$command"
