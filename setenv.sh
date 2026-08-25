@@ -27,14 +27,20 @@ if [ "$dev_volume" == "" ]; then
     export dev_volume="devvol"
 fi
 
-if [ "$1" == "print" ]; then
-    echo "use_gpus=${use_gpus}"
-    echo "container_runtime=${container_runtime}"
-    echo "label=${label}"
-    echo "container_user=${container_user}"
-    echo "container_port=${container_port}"
-    echo "dev_volume=${dev_volume}"
+if [ "$container_name" == "" ]; then
+    export container_name="devcontainer"
 fi
+
+echo "Environment"
+echo "========================================"
+echo "| use_gpus=${use_gpus}"
+echo "| container_runtime=${container_runtime}"
+echo "| container_name=${container_name}"
+echo "| label=${label}"
+echo "| container_user=${container_user}"
+echo "| container_port=${container_port}"
+echo "| dev_volume=${dev_volume}"
+echo "========================================"
 
 export running_dir=$(dirname $0)
 
