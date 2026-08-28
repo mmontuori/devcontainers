@@ -1,5 +1,5 @@
 FROM mmontuori/osbase:latest
-RUN apt-get install -y python3-dev pylint python3-pip
+RUN apt-get install -y python3-dev pylint python3-pip python3-venv
 # RUN python3 -m pip install --upgrade pip
 RUN apt install -y jupyterlab jupyter-notebook
 COPY containerfiles/files/jupyter-notebook.sh /usr/local/bin/

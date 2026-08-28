@@ -64,6 +64,8 @@ RUN chmod +x /tmp/install.sh && \
     /tmp/install.sh --yes && \
     rm -f /tmp/install.sh
 RUN curl --proto '=https' -kLsSf https://setup.atuin.sh | sh -s -- --non-interactive
+RUN cp /root/.atuin/bin/atuin /usr/local/bin/atuin
+RUN chmod 755 /usr/local/bin/atuin
 
 RUN apt-get update
 RUN apt-get install apt-transport-https wget --yes
