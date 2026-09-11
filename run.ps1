@@ -1,10 +1,12 @@
 param (
-    [string]$container_name,
-    [string]$tag = "latest",
-    [string]$container_owner = "mmontuori",
-    [string]$container_user = "devuser",
-    [string]$work_directory = "${env:USERPROFILE}"
+    [string]$container_name
+#    [string]$tag = "latest",
+#    [string]$container_owner = "mmontuori",
+#    [string]$container_user = "devuser",
+#    [string]$work_directory = "${env:USERPROFILE}"
 )
+
+. .\setenv.ps1
 
 function ListContainerFiles {
     Write-Output "Available containers:"
@@ -30,6 +32,6 @@ if ( $container_name -eq "" ) {
 
 Write-Output "running ${container_owner}/${container_name} with tag:${tag}"
 
-$command = "docker run -ti --rm --user ${container_user}:devgroup -v ${work_directory}:/home/${env:USERNAME} ${container_owner}/${container_name}:${tag} /bin/zsh"
+$command = "${container_runtime} run -ti --rm --user ${container_user}:devgroup -v ${dev_volume}:/home/${container_user} ${label}/${container_name} /bin/zsh"
 
 Invoke-Expression "$command"

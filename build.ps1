@@ -1,8 +1,10 @@
 param (
-    [string]$container_name,
-    [string]$tag = "latest",
-    [string]$container_owner = "mmontuori"
+    [string]$container_name
+    #[string]$tag = "latest",
+    #[string]$container_owner = "mmontuori"
 )
+
+. .\setenv.ps1
 
 $container_file = "containerfiles/$container_name"
 
@@ -31,6 +33,6 @@ if ( $path -eq $false ) {
 
 Write-Output "building ${container_owner}/${container_name} with tag:${tag}"
 
-$command = "docker build --file $container_file -t ${container_owner}/${container_name}:${tag} ."
+$command = "$container_runtime build --file $container_file -t ${label}/${container_name} ."
 
 Invoke-Expression "$command"
