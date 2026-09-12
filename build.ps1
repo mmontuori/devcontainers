@@ -1,7 +1,5 @@
 param (
     [string]$container_name
-    #[string]$tag = "latest",
-    #[string]$container_owner = "mmontuori"
 )
 
 . .\setenv.ps1

@@ -1,9 +1,5 @@
 param (
     [string]$container_name
-#    [string]$tag = "latest",
-#    [string]$container_owner = "mmontuori",
-#    [string]$container_user = "devuser",
-#    [string]$work_directory = "${env:USERPROFILE}"
 )
 
 . .\setenv.ps1
@@ -17,7 +13,7 @@ function ListContainerFiles {
     
 }
 
-if ( $container_name -eq "" ) {
+if ( $null -eq $container_name ) {
     Write-Output "usage: .\run.ps1 {container name} [container tag]"
     Write-Output "   -container_name [container name]"
     Write-Output "   -tag [container tag] (default: latest)"
@@ -32,6 +28,6 @@ if ( $container_name -eq "" ) {
 
 Write-Output "running ${container_owner}/${container_name} with tag:${tag}"
 
-$command = "${container_runtime} run -ti --rm --user ${container_user}:devgroup -v ${dev_volume}:/home/${container_user} ${label}/${container_name} /bin/zsh"
+$command = "${container_runtime} run --detach -ti --rm --user ${container_user}:devgroup -v ${dev_volume}:/home/${container_user} ${label}/${container_name} /bin/zsh"
 
 Invoke-Expression "$command"

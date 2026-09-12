@@ -1,41 +1,30 @@
-# copy this file to .env, uncomment, and set the variables below
-# to customize the container settings
-#
-# $use_gpus=
-# $container_name="devcontainer"
-$container_runtime="docker"
-# $label="label"
-# $container_user="devuser"
-# $container_port="8888"
-$dev_volume="c:/Users/v726/workspace"
+. .env.ps1
 
-
-
-if ( $label -eq $null ) {
+if ( $null -eq $label ) {
     $label="mmontuori"
 }
 
-if ( $container_runtime -eq $null ) {
+if ( $null -eq $container_runtime ) {
     $container_runtime="podman"
 }
 
-if ( $container_user -eq $null ) {
+if ( $null -eq $container_user ) {
     $container_user="devuser"
 }
 
-if ( $container_port -ne $null ) {
+if ( $null -ne $container_port ) {
     $container_args="-p${container_port}:${container_port}"
 }
 
-if ( $use_gpus -ne $null ) {
+if ( $null -ne $use_gpus ) {
     $gpu_args="--gpus=all"
 }
 
-if ( $dev_volume -eq $null ) {
+if ( $null -eq $dev_volume ) {
     $dev_volume="devvol"
 }
 
-if ( $container_name -eq $null ) {
+if ( $null -eq $container_name ) {
     $container_name="devcontainer"
 }
 
