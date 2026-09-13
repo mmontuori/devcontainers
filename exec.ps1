@@ -28,6 +28,6 @@ if ( $null -eq $docker_id ) {
     Exit 1
 }
 
-$command = "${container_runtime} exec -it $docker_id /bin/zsh"
+$command = "${container_runtime} exec -it $docker_id su - ${container_user}"
 
 Invoke-Expression "$command"

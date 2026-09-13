@@ -28,6 +28,8 @@ if ( $null -eq $container_name ) {
 
 Write-Output "running ${container_owner}/${container_name} with tag:${tag}"
 
-$command = "${container_runtime} run --detach -ti --rm --user ${container_user}:devgroup -v ${dev_volume}:/home/${container_user} ${label}/${container_name} /bin/zsh"
+$cmd = "su - ${container_user}"
+
+$command = "${container_runtime} run --detach -ti --rm --user ${container_user}:devgroup -v ${dev_volume}:/home/${container_user} ${label}/${container_name} ${cmd}"
 
 Invoke-Expression "$command"
